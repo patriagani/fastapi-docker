@@ -1,7 +1,9 @@
 from fastapi import FastAPI
+from .db.mongodb import close_mongo_connection, connect_to_mongo
 
 app = FastAPI()
 
+app.add_event_handler("startup", connect_to_mongo)
 
 @app.get("/")
 def read_root():
